@@ -1,9 +1,11 @@
 import express from 'express';
 import { ENV } from './lib/env.js';
 import path from "path"
+import connection from './lib/DB.js';
  const app = express()
 
  const __dirname = path.resolve()
+ 
 app.get("/api",(req, res)=>{ 
     res.send("message to api")
 })
@@ -17,7 +19,8 @@ if(ENV.NODE_ENV === 'production'){
     })
 }
 
-app.listen(process.env.PORT,()=>{
-    console.log(`server is running in the port ${ENV.PORT} `);
-    
-})
+const startServer = async ()=>{
+    await connection()
+    app.listen(process.env.PORT,()=>    console.log(`server is running in the port http://localhost:${ENV.PORT} `))
+}
+startServer()
