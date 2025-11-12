@@ -21,6 +21,5 @@ if(ENV.NODE_ENV === 'production'){
 
 const startServer = async ()=>{
     await connection()
-    app.listen(process.env.PORT,()=>    console.log(`server is running in the port http://localhost:${ENV.PORT} `))
-}
+app.listen(ENV.PORT,()=>    console.log(`server is running in the port http://localhost:${ENV.PORT} `))}
 startServer()
