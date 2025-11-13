@@ -29,7 +29,7 @@ const deleteUserfromDB = inngest.createFunction(
 
         const {id} = event.data
 
-        await User.deleteOne({cleckId: id })
+        await User.deleteOne({clerkId: id })
     }
 )
 export const functions  = [syncUser,deleteUserfromDB]
