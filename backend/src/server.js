@@ -2,13 +2,21 @@ import express from 'express';
 import { ENV } from './lib/env.js';
 import path from "path"
 import connection from './lib/DB.js';
- const app = express()
+import cors from "cors"
+import {serve} from "inngest/express"
+import { inngest ,functions} from './lib/inngest.js';
+  const app = express()
 
- const __dirname = path.resolve()
+ const __dirname = path.resolve();
+
+ app.use(express.json());
+ app.use(cors({origin:ENV.CLIENT_URL,credentials:true}));
+
+ app.use("/api/inngest", serve({client: inngest,functions}))
  
-app.get("/api",(req, res)=>{ 
+app.get("/api",(req, res)=>{
     res.send("message to api")
-})
+});
 
 // make sure this is in production
 if(ENV.NODE_ENV === 'production'){
