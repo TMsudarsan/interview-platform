@@ -1,5 +1,6 @@
-import { chatClient } from "../lib/stream.js"
+import { chatClient } from "../lib/stream.js";
 
+ 
 export const getStreamToken = (req,res) =>{
     try {
         const Token = chatClient.createToken(req.user.clerkId);
