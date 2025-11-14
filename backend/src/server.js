@@ -7,7 +7,8 @@ import {serve} from "inngest/express"
 import { inngest ,functions} from './lib/inngest.js';
 import { clerkMiddleware } from '@clerk/express'
 import { protectRoute } from './middleware/protectRoute.js';
-import route from './routes/chatRoute.js';
+import chatRoute from './routes/chatRoute.js';
+import sessionRoute from './routes/sessionRoute.js';
 
   const app = express()
 
@@ -18,7 +19,8 @@ import route from './routes/chatRoute.js';
  app.use(clerkMiddleware())
 
  app.use("/api/inngest", serve({client: inngest,functions}))
- app.use('/api/video-call', route)
+ app.use('/api/chat', chatRoute)
+ app.use('/api/sessions', sessionRoute)
  
 app.get("/vide",protectRoute,(req, res)=>{
     res.send("message to api")
