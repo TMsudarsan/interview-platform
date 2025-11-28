@@ -1,20 +1,20 @@
-import { SignedIn, SignedOut, SignIn, SignInButton, SignOutButton, UserButton } from '@clerk/clerk-react'
+import { SignedIn, SignedOut, SignIn, SignInButton, SignOutButton, UserButton, useSignIn, useUser } from '@clerk/clerk-react'
 import React from 'react'
+import { Navigate, Route, Routes } from 'react-router'
+import HomePage from './pages/HomePage'
+import ProblemPage from './pages/ProblemPage'
+import { Toaster } from 'react-hot-toast'
 
 const App = () => {
+  const { isSignedIn } = useUser()
   return (
-    <div > 
-      <h1>WelCome to my webSite</h1>
-
-      <SignedOut>
-      <SignInButton mode='modal'/>
-      </SignedOut>
-
-      <SignedIn>
-        <SignOutButton/>
-      </SignedIn>
-      <UserButton/>
-    </div>
+<>
+    <Routes>
+      <Route path='/' element={<HomePage />} />
+      <Route path='/problem' element={isSignedIn ? <ProblemPage /> : <Navigate to={"/"} />} />
+    </Routes>
+    <Toaster />
+</>
   )
 }
 
