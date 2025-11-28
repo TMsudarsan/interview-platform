@@ -122,7 +122,7 @@ export async function joinSession(req, res) {
   }
 }
 export async function endSession(req, res) {
-     try {
+    try {
     const { id } = req.params;
     const userId = req.user._id;
 
